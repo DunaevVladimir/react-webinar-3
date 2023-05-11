@@ -73,6 +73,9 @@ class Store {
 			list: this.state.list.map(item => {
 				if (item.code === code) {
 					item.selected = !item.selected;
+					if (item.selected) {
+						item.selections ? item.selections++ : item.selections = 1; //@ добавляем атрибут , считающий количество выделений
+					}
 				} else {
 					item.selected = false; //@ Убираем атрибут у всех кроме элемента, на котором сработало
 				}
