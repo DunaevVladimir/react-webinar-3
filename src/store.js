@@ -4,7 +4,9 @@
 class Store {
 	constructor(initState = {}) {
 		this.state = initState;
-		this.listeners = []; // Слушатели изменений состояния
+		this.listeners = [];
+		// Слушатели изменений состояния
+		this.id = this.state.list.length; //@ инициализируем id в начале равный длине list
 	}
 
 	/**
@@ -44,8 +46,9 @@ class Store {
 	addItem() {
 		this.setState({
 			...this.state,
-			list: [...this.state.list, { code: this.state.list.length + 1, title: 'Новая запись' }]
-		})
+			list: [...this.state.list, { code: this.id + 1, title: 'Новая запись' }], //@ code будет равен уникальному id
+		});
+		this.id++; //@ инкрементируем id
 	};
 
 	/**
