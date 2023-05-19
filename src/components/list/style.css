@@ -1,0 +1,11 @@
+.List{
+
+}
+
+.List-item {
+  border-bottom: 1px dashed #ccc;
+}
+
+.List-item:first-child {	/*@ Для первого элемента добавляем границу, как по макету */
+  border-top: 1px dashed #ccc;
+}
