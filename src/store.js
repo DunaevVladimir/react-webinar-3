@@ -51,17 +51,16 @@ class Store {
 				totalCost: this.state.totalCost + item.price,
 				cartList: this.state.cartList.map((element) => {
 					if (element.code === item.code) {
-						element.count++;
+						return { ...element, count: element.count + 1 }
 					}
 					return element;
 				})
 			})
 		} else {
-			item.count = 1;
 			this.setState({
 				...this.state,
 				totalCost: this.state.totalCost + item.price,
-				cartList: [...this.state.cartList, item],
+				cartList: [...this.state.cartList, { ...item, count: 1 }],
 			})
 		}
 	};

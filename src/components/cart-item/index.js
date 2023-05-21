@@ -4,10 +4,11 @@ import Button from "../button";
 import './style.css';
 
 
-function Item(props) {
+function CartItem(props) {
 
 	const callbacks = {
-		useFunction: () => {
+		useFunction: (e) => {
+			e.stopPropagation();
 			props.useFunction(props.item);
 		}
 	}
@@ -19,26 +20,30 @@ function Item(props) {
 				{props.item.title} {/*Убираем счетчик */}
 			</div>
 			<div className='Item-price'>{`${props.item.price.toLocaleString()} ₽`}</div> {/*Выводим цену отформатированную в соответствии с локалью */}
+			{props.item.count &&
+				<div className='Item-count'>{`${props.item.count} шт`}</div>
+			}
 			<div className='Item-actions'>
 				<Button useFunction={callbacks.useFunction}>
-					Добавить
+					Удалить
 				</Button>
 			</div>
 		</div>
 	);
 }
 
-Item.propTypes = {
+CartItem.propTypes = {
 	item: PropTypes.shape({
 		code: PropTypes.number,
 		title: PropTypes.string,
 		price: PropTypes.number,
+		count: PropTypes.number
 	}).isRequired,
 	useFunction: PropTypes.func,
 };
 
-Item.defaultProps = {
+CartItem.defaultProps = {
 	useFunction: () => { },
 }
 
-export default React.memo(Item);
+export default React.memo(CartItem);

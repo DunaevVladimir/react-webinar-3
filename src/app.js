@@ -5,6 +5,7 @@ import Head from "./components/head";
 import Cart from './components/cart';
 import Info from './components/info';
 import CartInfo from './components/cart-Info';
+import Item from './components/item';
 import PageLayout from "./components/page-layout";
 
 /**
@@ -13,7 +14,6 @@ import PageLayout from "./components/page-layout";
  * @returns {React.ReactElement}
  */
 function App({ store }) {
-
 	const list = store.getState().list;
 	const cartList = store.getState().cartList;
 	const totalCost = store.getState().totalCost;
@@ -30,7 +30,11 @@ function App({ store }) {
 
 		addItemToCart: useCallback((item) => { //@ Добавляем товар в корзину
 			store.addItemToCart(item);
-		}, [store])
+		}, [store]),
+
+		renderElement: useCallback((item) => {
+			return <Item item={item} useFunction={callbacks.addItemToCart} /> //@ Рендерим компонент Item
+		}, [])
 	}
 
 	return (
@@ -40,9 +44,10 @@ function App({ store }) {
 				<CartInfo totalCount={cartList.length} totalCost={totalCost}></CartInfo>
 				<Controls openPopup={togglePopup} /> {/* При нажатии открываем корзину*/}
 			</Info>
-			<List list={list}
-				button='Добавить'
-				useFunction={callbacks.addItemToCart} />
+			<List
+				list={list}
+				renderElement={callbacks.renderElement}
+			/>
 			{isPopupOpen &&
 				<Cart
 					list={cartList}
