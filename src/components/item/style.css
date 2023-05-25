@@ -17,6 +17,23 @@
 .Item-title {
   width: 100%;
   padding: 20px 10px;
+	display: flex;
+}
+
+.Item-title a{
+	text-decoration: none;
+	color: #000;
+}
+
+.Item-title a::after{
+	content: "";
+	display: none;
+	height: 1px;
+	background: #000;
+}
+
+.Item-title a:hover::after{
+	display: block;
 }
 
 .Item-actions {

@@ -14,3 +14,17 @@
   font-weight: bold;
   margin: 0 20px;
 }
+
+.BasketTool-links {
+	flex-grow: 1;
+	justify-self: flex-start;
+}
+
+.BasketTool-links a {
+	color: #0087E9;
+}
+
+
+
+
+

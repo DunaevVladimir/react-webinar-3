@@ -1,0 +1,39 @@
+.Pagination {
+	padding: 22px 20px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.Pagination-gap {
+	padding: 0 1px;
+	width: 18px;
+	color: #CCCCCC;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.Pagination-button {
+	background: #fff;
+	border: none;
+	min-width: 24px;
+	cursor: pointer;
+	padding: 4px 0;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1;
+}
+
+.Pagination-button:hover {
+	background: #E1E1E1;
+	transition: all 0.3s ease;
+}
+
+.Pagination-button_active {
+	background: #0087E9;
+	color: #fff;
+}
+
+.Pagination-button_active:hover {
+	background: #0087E9;
+}

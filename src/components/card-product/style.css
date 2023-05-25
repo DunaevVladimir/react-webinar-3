@@ -1,0 +1,24 @@
+.CardProduct {
+	padding: 20px 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.CardProduct-info {
+	font-size: 18px;
+	line-height: 20.7px;
+}
+
+.CardProduct-price {
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 28px;
+	display: flex;
+	gap: 17px;
+}
+
+.CardProduct-button {
+	align-self: start;
+}
+

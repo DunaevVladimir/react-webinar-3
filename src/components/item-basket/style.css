@@ -13,6 +13,23 @@
 .ItemBasket-title {
   width: 100%;
   padding: 20px 10px;
+	display: flex;
+}
+
+.ItemBasket-title a{
+	text-decoration: none;
+	color: #000;
+}
+
+.ItemBasket-title a::after{
+	content: "";
+	display: none;
+	height: 1px;
+	background: #000;
+}
+
+.ItemBasket-title a:hover::after{
+	display: block;
 }
 
 .ItemBasket-right {
