@@ -20,10 +20,8 @@ class Product extends StoreModule {
 		}
 	}
 
-	async loadProductCard(id) {
-		//@ При первом запросе выведет первые 10 элементов без пропуска с нужными полями для каталога - id,title,price и количеством элементов всего
+	async loadProductCard(id) { //@ Рендер карточки по _id
 		const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
-		//@ Рендер осуществляется основываясь на текущую страницу
 		const json = await response.json();
 		this.setState({
 			...this.getState(),

@@ -7,7 +7,15 @@
  * @param [locale] {String} Локаль (код языка)
  * @returns {String}
  */
-export function plural(value, variants = {}, locale = 'ru-RU') {
+export function plural(value, language = "ru") {
+	let locale = "ru-RU";
+	let variants = {};
+
+	//@ В зависимости от языка применяем настрйки
+	switch (language) {
+		case "ru": variants = { one: 'товар', few: 'товара', many: 'товаров' }; locale = "ru-RU"; break;
+		case "en": variants = { one: 'item', other: 'items' }; locale = "en-US"; break;
+	}
 	// Получаем фурму кодовой строкой: 'zero', 'one', 'two', 'few', 'many', 'other'
 	// В русском языке 3 формы: 'one', 'few', 'many', и 'other' для дробных
 	// В английском 2 формы: 'one', 'other'

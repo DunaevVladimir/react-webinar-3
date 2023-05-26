@@ -19,13 +19,18 @@
 .ItemBasket-title a{
 	text-decoration: none;
 	color: #000;
+	position: relative;
 }
 
 .ItemBasket-title a::after{
 	content: "";
 	display: none;
+	width: 100%;
 	height: 1px;
 	background: #000;
+	position: absolute;
+	bottom: 2px;
+	left: 0;
 }
 
 .ItemBasket-title a:hover::after{

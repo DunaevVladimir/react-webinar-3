@@ -1,25 +1,29 @@
-import { memo } from "react";
+import { memo, useContext } from "react";
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat, plural } from "../../utils";
-import { Link } from "react-router-dom";
 import './style.css';
+import { Link } from "react-router-dom";
+import { LanguageContext } from "../../language";
+import words from '../../language/words.json';
 
 function BasketTool({ sum, amount, onOpen }) {
 	const cn = bem('BasketTool');
+	const language = useContext(LanguageContext).language;
+
 	return (
 		<div className={cn()}>
 			<div className={cn('links')}>
-				<Link to="/">Главная</Link>
+				<Link to="/">{words[language].pages.home}</Link>
 			</div>
-			<span className={cn('label')}>В корзине:</span>
+			<span className={cn('label')}>{`${words[language].basketTool.inBasket}:`}</span>
 			<span className={cn('total')}>
 				{amount
-					? `${amount} ${plural(amount, { one: 'товар', few: 'товара', many: 'товаров' })} / ${numberFormat(sum)} ₽`
-					: `пусто`
+					? `${amount} ${plural(amount, language)} / ${numberFormat(sum)} ₽`
+					: `${words[language].basketTool.empty}`
 				}
 			</span>
-			<button onClick={onOpen}>Перейти</button>
+			<button onClick={onOpen}>{words[language].buttons.goTo}</button>
 		</div>
 	);
 }

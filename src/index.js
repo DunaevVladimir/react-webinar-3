@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client';
 import App from './app';
 import Store from "./store";
 import { StoreContext } from "./store/context";
+import LanguageProvider from './language';
 import { BrowserRouter } from 'react-router-dom';
 
 const store = new Store();
@@ -12,7 +13,9 @@ const root = createRoot(document.getElementById('root'));
 root.render(
 	<BrowserRouter>
 		<StoreContext.Provider value={store}>
-			<App />
+			<LanguageProvider>
+				<App />
+			</LanguageProvider>
 		</StoreContext.Provider>
 	</BrowserRouter>
 );
