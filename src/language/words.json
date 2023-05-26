@@ -16,7 +16,7 @@
 		"basketTool": {
 			"inBasket": "В корзине",
 			"empty": "пусто",
-			"pcs": "шт",
+			"psc": "шт",
 			"total": "Итого"
 		},
 		"cardProduct": {
