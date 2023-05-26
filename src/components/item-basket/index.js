@@ -25,7 +25,7 @@ function ItemBasket(props) {
 			</div>
 			<div className={cn('right')}>
 				<div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
-				<div className={cn('cell')}>{numberFormat(props.item.amount || 0)} {words[language].basketTool.pcs}</div>
+				<div className={cn('cell')}>{numberFormat(props.item.amount || 0)} {words[language].basketTool.psc}</div>
 				<div className={cn('cell')}><button onClick={callbacks.onRemove}>{words[language].buttons.remove}</button></div>
 			</div>
 		</div>

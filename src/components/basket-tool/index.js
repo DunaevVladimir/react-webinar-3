@@ -13,9 +13,6 @@ function BasketTool({ sum, amount, onOpen }) {
 
 	return (
 		<div className={cn()}>
-			<div className={cn('links')}>
-				<Link to="/">{words[language].pages.home}</Link>
-			</div>
 			<span className={cn('label')}>{`${words[language].basketTool.inBasket}:`}</span>
 			<span className={cn('total')}>
 				{amount

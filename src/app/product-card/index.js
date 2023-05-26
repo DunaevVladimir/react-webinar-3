@@ -6,6 +6,7 @@ import useStore from "../../store/use-store";
 import PageLayout from "../../components/page-layout";
 import useSelector from "../../store/use-selector";
 import { useParams } from 'react-router-dom';
+import NavLayout from '../../components/nav-layout';
 
 function ProductCard() {
 
@@ -33,8 +34,7 @@ function ProductCard() {
 	return (
 		<PageLayout>
 			<Head title={select.card.title} />
-			<BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-				sum={select.sum} />
+			<NavLayout></NavLayout>
 			<CardProduct card={select.card} onAdd={callbacks.addToBasket} />
 		</PageLayout>
 	);
