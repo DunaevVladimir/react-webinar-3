@@ -1,11 +1,3 @@
 .NavLayout {
 	display: flex;
 }
-
-.NavLayout-left {
-	flex-grow: 1;
-}
-
-.NavLayout-right {
-	justify-content: flex-end;
-}

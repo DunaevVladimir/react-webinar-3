@@ -1,13 +1,17 @@
 import { memo } from "react";
 import PropTypes from 'prop-types';
+import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
-function Pages({ list, renderItem }) {
+function Nav({ list, renderItem }) {
+
+	const cn = bem('Nav');
+
 	return (
-		<nav className='Pages'>
-			<ul className='Pages-list'>{
+		<nav className={cn()}>
+			<ul className={cn('list')}>{
 				list.map(item =>
-					<li key={item._id} className='Pages-item'>
+					<li key={item._id} className={cn('item')}>
 						{renderItem(item)}
 					</li>
 				)}
@@ -16,15 +20,15 @@ function Pages({ list, renderItem }) {
 	)
 }
 
-Pages.propTypes = {
+Nav.propTypes = {
 	list: PropTypes.arrayOf(PropTypes.shape({
 		_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 	})).isRequired,
 	renderItem: PropTypes.func
 };
 
-Pages.defaultProps = {
+Nav.defaultProps = {
 	renderItem: (item) => { }
 }
 
-export default memo(Pages);
+export default memo(Nav);

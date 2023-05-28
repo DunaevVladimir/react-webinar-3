@@ -1,21 +1,21 @@
-.Pages {
+.Nav {
 	flex-grow: 1;
 	justify-self: flex-start;
 	font-size: 18px;
 }
 
-.Pages-list {
+.Nav-list {
 	list-style: none;
 	padding: 0 20px;
 }
 
-.Pages-item a {
+.Nav-item a {
 	color: #0087E9;
 	text-decoration: none;
 	position: relative;
 }
 
-.Pages-item a::after{
+.Nav-item a::after{
 	content: "";
 	display: block;
 	width: 100%;
