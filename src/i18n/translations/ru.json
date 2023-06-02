@@ -11,6 +11,11 @@
 	"basket.delete": "Удалить",
 	"article.add": "Добавить",
 	"filter.reset": "Сбросить",
+	"auth.sign": "Вход",
+	"auth.logout": "Выход",
+	"auth.login": "Логин",
+	"auth.password": "Пароль",
+	"auth.signButton": "Войти",
 	"basket.articles": {
 		"one": "товар",
 		"few": "товара",

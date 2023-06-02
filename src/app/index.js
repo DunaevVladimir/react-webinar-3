@@ -4,7 +4,7 @@ import useSelector from "../hooks/use-selector";
 import Main from "./main";
 import Basket from "./basket";
 import Article from "./article";
-import Auth from '../components/auth';
+import Auth from './auth';
 
 /**
  * Приложение

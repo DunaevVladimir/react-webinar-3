@@ -12,7 +12,6 @@ function Select(props) {
 		return list.map(item => {
 			return <>
 				<option key={item.value} value={item.value}>{separator}{item.title}</option>
-				{console.log(item.value)}
 				{item.children && render(item.children, `${separator + '- '}`)}
 			</>
 		})

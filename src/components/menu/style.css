@@ -4,13 +4,16 @@
   justify-content: flex-start;
   padding: 20px;
   margin: 0;
-  font-size: 18px;
 }
 
 .Menu-item {
   display: block;
   padding: 2px 4px 3px 2px;
   margin: 0 2px;
+}
+
+.Menu-item a {
+	color: #0087E9;
 }
 
 .Menu-item:first-child {
@@ -21,4 +24,12 @@
 .Menu-item:last-child {
   margin-right: 0;
   padding-right: 0;
+}
+
+.Menu-item_fontSize_small {
+	font-size: 13px;
+}
+
+.Menu-item_fontSize_medium {
+	font-size: 18px;
 }

@@ -1,0 +1,21 @@
+.AuthPage-title {
+	margin-bottom: 17px;
+	font-weight: 700;
+	font-size: 24px;
+}
+
+.AuthPage-item {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+}
+
+.AuthPage-form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.AuthPage-button {
+	align-self: start;
+}
