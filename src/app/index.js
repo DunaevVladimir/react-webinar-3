@@ -1,9 +1,10 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
-import {Routes, Route} from 'react-router-dom';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import useSelector from "../hooks/use-selector";
 import Main from "./main";
 import Basket from "./basket";
 import Article from "./article";
+import Auth from '../components/auth';
 
 /**
  * Приложение
@@ -11,18 +12,18 @@ import Article from "./article";
  */
 function App() {
 
-  const activeModal = useSelector(state => state.modals.name);
+	const activeModal = useSelector(state => state.modals.name);
 
-  return (
-    <>
-      <Routes>
-        <Route path={''} element={<Main/>}/>
-        <Route path={'/articles/:id'} element={<Article/>}/>
-      </Routes>
-
-      {activeModal === 'basket' && <Basket/>}
-    </>
-  );
+	return (
+		<>
+			<Routes>
+				<Route path={''} element={<Main />} />
+				<Route path={'/articles/:id'} element={<Article />} />
+				<Route path={'/users/sign'} element={<Auth />} />
+			</Routes>
+			{activeModal === 'basket' && <Basket />}
+		</>
+	);
 }
 
 export default App;
