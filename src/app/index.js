@@ -4,6 +4,7 @@ import useSelector from "../hooks/use-selector";
 import Main from "./main";
 import Basket from "./basket";
 import Article from "./article";
+import Profile from './profile';
 import Auth from './auth';
 
 /**
@@ -20,6 +21,7 @@ function App() {
 				<Route path={''} element={<Main />} />
 				<Route path={'/articles/:id'} element={<Article />} />
 				<Route path={'/users/sign'} element={<Auth />} />
+				<Route path={'/users/:id'} element={<Profile />} />
 			</Routes>
 			{activeModal === 'basket' && <Basket />}
 		</>

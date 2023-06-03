@@ -10,6 +10,7 @@ import Navigation from "../../containers/navigation";
 import Spinner from "../../components/spinner";
 import ArticleCard from "../../components/article-card";
 import LocaleSelect from "../../containers/locale-select";
+import AuthTool from "../../containers/auth-tool";
 
 function Article() {
 	const store = useStore();
@@ -35,6 +36,7 @@ function Article() {
 
 	return (
 		<PageLayout>
+			<AuthTool></AuthTool>
 			<Head title={select.article.title}>
 				<LocaleSelect />
 			</Head>

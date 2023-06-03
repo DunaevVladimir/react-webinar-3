@@ -16,6 +16,15 @@
 	gap: 20px;
 }
 
+.AuthPage-input {
+	width: 203px;
+	height: 21px;
+}
+
 .AuthPage-button {
 	align-self: start;
+}
+
+.AuthPage-error {
+	color: #FF0000;
 }

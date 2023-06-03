@@ -29,7 +29,7 @@ function AuthTool() {
 
 	const options = {
 		menu: useMemo(() => ([
-			{ key: 1, title: select.user.name, link: '/' },
+			{ key: 1, title: select.user.name, link: `/users/${select.user._id}` },
 		]), [t, select.user]),
 	};
 
