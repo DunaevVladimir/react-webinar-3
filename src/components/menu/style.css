@@ -6,6 +6,10 @@
   margin: 0;
 }
 
+.Menu_padding_small {
+	padding: 0 20px;
+}
+
 .Menu-item {
   display: block;
   padding: 2px 4px 3px 2px;

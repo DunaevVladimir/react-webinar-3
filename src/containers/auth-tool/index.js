@@ -9,10 +9,6 @@ import { Link } from "react-router-dom";
 
 function AuthTool() {
 
-	useInit(() => {
-		store.actions.auth.isLogged();
-	}, [], true);
-
 	const store = useStore();
 	const { t } = useTranslate();
 
@@ -35,7 +31,7 @@ function AuthTool() {
 
 	return (
 		<SideLayout side="end" padding="medium-small">
-			<Menu items={options.menu} onNavigate={callbacks.onNavigate} fontSize="small"></Menu>
+			<Menu items={options.menu} onNavigate={callbacks.onNavigate} fontSize="small" padding="small"></Menu>
 			{
 				select.isLogged
 					? <button onClick={callbacks.onLogout}>{t('auth.logout')}</button>

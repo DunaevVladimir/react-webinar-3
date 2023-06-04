@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
@@ -20,38 +20,31 @@ function Profile() {
 	// Параметры из пути /articles/:id
 	const params = useParams();
 
-	useInit(() => {
-		store.actions.profile.load(params.id)
-	}, [params.id]);
-
 	const select = useSelector(state => ({
 		profile: state.profile.data,
 		waiting: state.profile.waiting,
-		isLogged: state.auth.isLogged
+		isLogged: state.auth.isLogged,
+		waiting: state.auth.waiting,
+		isLoad: state.auth.isLoad
 	}));
+
+	useInit(() => {
+		store.actions.profile.load(params.id);
+	}, [params.id]);
 
 	const { t } = useTranslate();
 
-	const callbacks = {
-		// Добавление в корзину
-		addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
-	}
-
 	return (
-		select.isLogged
-			?
-				<PageLayout>
-					<AuthTool></AuthTool>
-					<Head title={t('title')}>
-						<LocaleSelect />
-					</Head>
-					<Navigation />
-					<Spinner active={select.waiting}>
-						<ProfileCard profile={select.profile} />
-					</Spinner>
-				</PageLayout>
-			:		
-				navigate("/users/sign")
+		<PageLayout>
+			<AuthTool></AuthTool>
+			<Head title={t('title')}>
+				<LocaleSelect />
+			</Head>
+			<Navigation />
+			<Spinner active={select.waiting}>
+				<ProfileCard profile={select.profile} />
+			</Spinner>
+		</PageLayout>
 	);
 }
 

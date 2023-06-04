@@ -21,7 +21,6 @@ class CatalogState extends StoreModule {
 				category: '',
 			},
 			count: 0,
-			categories: [],
 			waiting: false
 		}
 	}
@@ -65,16 +64,12 @@ class CatalogState extends StoreModule {
 
 		const params = { ...this.getState().params, ...newParams };
 
-		const responseCategories = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`);
-		const jsonCategories = await responseCategories.json();
 		// Установка новых параметров и признака загрузки
 		this.setState({
 			...this.getState(),
-			categories: ([{ value: '', title: 'Все', _id: 0 }]).concat(parseToList(undefined, jsonCategories.result.items)),
 			params,
 			waiting: true
 		}, 'Установлены параметры каталога');
-
 
 		// Сохранить параметры в адрес страницы
 		let urlSearch = new URLSearchParams(params).toString();

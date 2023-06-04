@@ -6,10 +6,26 @@ class AuthState extends StoreModule {
 		return {
 			user: {},
 			isLogged: false,
+			errorMessage: '',
+			waiting: false,
+			isLoad: false,
 		};
 	}
 
+	resetFields() {
+		this.setState({
+			...this.getState(),
+			errorMessage: '',
+		});
+	}
+
 	async isLogged() {
+
+		this.setState({
+			...this.getState(),
+			waiting: true,
+		});
+
 		const token = window.localStorage.getItem("token");
 		if (token) {
 			const response = await fetch(`/api/v1/users/self`, {
@@ -30,6 +46,8 @@ class AuthState extends StoreModule {
 					email: json.result.email,
 				},
 				isLogged: true,
+				waiting: false,
+				isLoad: true,
 			}, 'Загружены данные user');
 		}
 	}
@@ -49,45 +67,48 @@ class AuthState extends StoreModule {
 				...this.getState(),
 				user: {},
 				isLogged: false,
+				waiting: false,
 			}, 'Уничтожаем токен навсегда, навечно, безвозвратно, но вы , конечно, можете получить новый');
 			window.localStorage.setItem("token", "");
 		}
 	}
 
-	async logIn({login, password}) {
-			const response = await fetch(`/api/v1/users/sign`, {
-				method: "POST",
-				crossDomain: true,
-				headers: {
-					"Content-Type": "application/json",
+	async logIn({ login, password }) {
+		const response = await fetch(`/api/v1/users/sign`, {
+			method: "POST",
+			crossDomain: true,
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				"login": login,
+				"password": password,
+			})
+		});
+
+		const json = await response.json();
+
+		if (json.result) {
+			const { token, user } = json.result;
+			window.localStorage.setItem("token", token);
+			this.setState({
+				...this.getState(),
+				user: {
+					_id: user._id,
+					name: user.profile.name,
+					phone: user.profile.phone,
+					email: user.email,
 				},
-				body: JSON.stringify({
-					"login": login,
-					"password": password,
-				})
-			});
-
-			const json = await response.json();
-
-			if (json.result) {
-				const { token, user } = json.result;
-				window.localStorage.setItem("token", token);
-				this.setState({
-					...this.getState(),
-					user: {
-						_id: user._id,
-						name: user.profile.name,
-						phone: user.profile.phone,
-						email: user.email,
-					},
-					isLogged: true,
-				})
-			} else {
-				this.setState({
-					...this.getState(),
-					errorMessage: json.error.message,
-				})		
-			}
+				isLogged: true,
+				waiting: false,
+			})
+		} else {
+			this.setState({
+				...this.getState(),
+				errorMessage: json.error.message,
+				waiting: false,
+			})
+		}
 	}
 }
 

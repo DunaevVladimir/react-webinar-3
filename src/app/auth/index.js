@@ -1,7 +1,6 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
-import useInit from "../../hooks/use-init";
 import useSelector from "../../hooks/use-selector";
 import Navigation from "../../containers/navigation";
 import PageLayout from "../../components/page-layout";
@@ -11,6 +10,7 @@ import AuthTool from "../../containers/auth-tool";
 import AuthPage from '../../components/auth-page';
 import SideLayout from '../../components/side-layout';
 import { useNavigate } from 'react-router-dom';
+import useInit from '../../hooks/use-init';
 
 function Auth() {
 
@@ -18,7 +18,7 @@ function Auth() {
 	const store = useStore();
 
 	useInit(() => {
-		store.actions.catalog.initParams();
+		store.actions.auth.resetFields();
 	}, [], true);
 
 	const select = useSelector(state => ({
@@ -38,18 +38,18 @@ function Auth() {
 	return (
 		select.isLogged
 			?
-				navigate(`/users/${select.userId}`)
+			navigate(`/users/${select.userId}`)
 			:
-				<PageLayout>
-					<AuthTool></AuthTool>
-					<Head title={t('title')}>
-						<LocaleSelect />
-					</Head>
-					<Navigation />
-					<SideLayout padding="medium">
-						<AuthPage t={t} onLogin={(inputs) => callbacks.onLogin(inputs)} error={select.error}></AuthPage>
-					</SideLayout>
-				</PageLayout>
+			<PageLayout>
+				<AuthTool></AuthTool>
+				<Head title={t('title')}>
+					<LocaleSelect />
+				</Head>
+				<Navigation />
+				<SideLayout padding="medium">
+					<AuthPage t={t} onLogin={(inputs) => callbacks.onLogin(inputs)} error={select.error}></AuthPage>
+				</SideLayout>
+			</PageLayout>
 	);
 }
 
