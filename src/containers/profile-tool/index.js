@@ -17,16 +17,13 @@ import useInit from "../../hooks/use-init";
 function ProfileTool({ children }) {
 
 	const location = useLocation();
-	const params = useParams();
 
 	const select = useSelector(state => ({
-		user: state.auth.user,
 		isLogged: state.auth.isLogged,
 		waiting: state.auth.waiting,
-		isLoad: state.auth.isLoad
 	}));
 
-	if ((!select.isLogged || select.user._id !== params.id) && select.isLoad) {
+	if (!select.isLogged) {
 		return <Navigate to="/users/sign" replace state={{ path: location.pathname }} />
 	}
 

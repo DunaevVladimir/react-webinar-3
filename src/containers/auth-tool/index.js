@@ -6,6 +6,7 @@ import Menu from "../../components/menu";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import { Link } from "react-router-dom";
+import AuthBody from "../../components/auth-body";
 
 function AuthTool() {
 
@@ -30,14 +31,14 @@ function AuthTool() {
 	};
 
 	return (
-		<SideLayout side="end" padding="medium-small">
+		<AuthBody>
 			<Menu items={options.menu} onNavigate={callbacks.onNavigate} fontSize="small" padding="small"></Menu>
 			{
 				select.isLogged
 					? <button onClick={callbacks.onLogout}>{t('auth.logout')}</button>
 					: <Link to="/users/sign"><button>{t('auth.sign')}</button></Link>
 			}
-		</SideLayout>
+		</AuthBody>
 	);
 }
 

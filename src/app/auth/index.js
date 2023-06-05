@@ -22,8 +22,9 @@ function Auth() {
 	}, [], true);
 
 	const select = useSelector(state => ({
+		user: state.auth.user,
 		isLogged: state.auth.isLogged,
-		userId: state.auth.user._id,
+		isLogged: state.auth.isLogged,
 		error: state.auth.errorMessage
 	}));
 
@@ -36,7 +37,7 @@ function Auth() {
 	}
 
 	if (select.isLogged) {
-		return <Navigate to={"/users/" + select.userId} replace state={{ path: location.pathname }} />
+		return <Navigate to={"/users/" + select.user._id} replace state={{ path: location.pathname }} />
 	}
 
 	return (

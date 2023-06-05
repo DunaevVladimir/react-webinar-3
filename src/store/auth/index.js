@@ -5,10 +5,9 @@ class AuthState extends StoreModule {
 	initState() {
 		return {
 			user: {},
-			isLogged: false,
+			isLogged: true,
 			errorMessage: '',
 			waiting: false,
-			isLoad: false,
 		};
 	}
 
@@ -24,7 +23,6 @@ class AuthState extends StoreModule {
 		this.setState({
 			...this.getState(),
 			waiting: true,
-			isLoad: false,
 		});
 
 		const token = window.localStorage.getItem("token");
@@ -48,14 +46,12 @@ class AuthState extends StoreModule {
 				},
 				isLogged: true,
 				waiting: false,
-				isLoad: true,
 			}, 'Загружены данные user');
 		} else {
 			this.setState({
 				...this.getState(),
 				isLogged: false,
 				waiting: false,
-				isLoad: true,
 			});
 		}
 	}
@@ -111,9 +107,10 @@ class AuthState extends StoreModule {
 				waiting: false,
 			})
 		} else {
+			console.log(json);
 			this.setState({
 				...this.getState(),
-				errorMessage: json.error.message,
+				errorMessage: json.error.data.issues[0].message,
 				waiting: false,
 			})
 		}
