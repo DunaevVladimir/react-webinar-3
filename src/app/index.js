@@ -30,7 +30,10 @@ function App() {
 				<Route path={''} element={<Main />} />
 				<Route path={'/articles/:id'} element={<Article />} />
 				<Route path={'/users/sign'} element={<Auth />} />
-				<Route path={'/users/:id'} element={<ProfileTool />} />
+				<Route path={'/users/:id'} element={
+					<ProfileTool>
+						<Profile />
+					</ProfileTool>} />
 			</Routes>
 			{activeModal === 'basket' && <Basket />}
 		</>

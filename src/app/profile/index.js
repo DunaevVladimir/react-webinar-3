@@ -11,6 +11,7 @@ import Spinner from "../../components/spinner";
 import ProfileCard from '../../components/profile-card';
 import LocaleSelect from "../../containers/locale-select";
 import AuthTool from "../../containers/auth-tool";
+import SideLayout from '../../components/side-layout';
 
 function Profile() {
 
@@ -42,7 +43,9 @@ function Profile() {
 			</Head>
 			<Navigation />
 			<Spinner active={select.waiting}>
-				<ProfileCard profile={select.profile} />
+				<SideLayout padding="medium">
+					<ProfileCard profile={select.profile} />
+				</SideLayout>
 			</Spinner>
 		</PageLayout>
 	);

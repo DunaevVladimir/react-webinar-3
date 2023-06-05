@@ -24,6 +24,7 @@ class AuthState extends StoreModule {
 		this.setState({
 			...this.getState(),
 			waiting: true,
+			isLoad: false,
 		});
 
 		const token = window.localStorage.getItem("token");
@@ -49,6 +50,13 @@ class AuthState extends StoreModule {
 				waiting: false,
 				isLoad: true,
 			}, 'Загружены данные user');
+		} else {
+			this.setState({
+				...this.getState(),
+				isLogged: false,
+				waiting: false,
+				isLoad: true,
+			});
 		}
 	}
 

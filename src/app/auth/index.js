@@ -9,13 +9,13 @@ import LocaleSelect from "../../containers/locale-select";
 import AuthTool from "../../containers/auth-tool";
 import AuthPage from '../../components/auth-page';
 import SideLayout from '../../components/side-layout';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import useInit from '../../hooks/use-init';
 
 function Auth() {
 
-	const navigate = useNavigate();
 	const store = useStore();
+	const location = useLocation();
 
 	useInit(() => {
 		store.actions.auth.resetFields();
@@ -35,21 +35,21 @@ function Auth() {
 		}, [store]),
 	}
 
+	if (select.isLogged) {
+		return <Navigate to={"/users/" + select.userId} replace state={{ path: location.pathname }} />
+	}
+
 	return (
-		select.isLogged
-			?
-			navigate(`/users/${select.userId}`)
-			:
-			<PageLayout>
-				<AuthTool></AuthTool>
-				<Head title={t('title')}>
-					<LocaleSelect />
-				</Head>
-				<Navigation />
-				<SideLayout padding="medium">
-					<AuthPage t={t} onLogin={(inputs) => callbacks.onLogin(inputs)} error={select.error}></AuthPage>
-				</SideLayout>
-			</PageLayout>
+		<PageLayout>
+			<AuthTool></AuthTool>
+			<Head title={t('title')}>
+				<LocaleSelect />
+			</Head>
+			<Navigation />
+			<SideLayout padding="medium">
+				<AuthPage t={t} onLogin={(inputs) => callbacks.onLogin(inputs)} error={select.error}></AuthPage>
+			</SideLayout>
+		</PageLayout>
 	);
 }
 
