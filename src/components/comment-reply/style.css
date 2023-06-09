@@ -1,0 +1,42 @@
+.CommentReply {
+	padding: 30px 0 0 0;
+}
+
+.CommentReply a {
+	color: #0087E9;
+	font-size: 16px;
+	line-height: 18px;
+}
+
+.CommentReply-form {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+}
+
+.CommentReply-description {
+	font-weight: 700;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+.CommentReply-textarea {
+	padding: 4px 5px;
+	margin-bottom: 10px;
+	width: 100%;
+	resize: none;
+	height: 76px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	color: #000;
+	box-shadow: inset 0px 1px 4px rgba(102, 102, 102, 0.1);
+}
+
+.CommentReply-textarea::placeholder {
+	color: #000;
+}
+
+.CommentReply-buttons {
+	display: flex;
+	column-gap: 10px;
+}

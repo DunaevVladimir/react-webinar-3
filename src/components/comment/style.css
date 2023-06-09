@@ -1,0 +1,33 @@
+.Comment {
+
+}
+
+.Comment-info {
+	display: flex;
+	column-gap: 10px;
+	box-sizing: border-box;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+.Comment-userName {
+	font-weight: 700;
+}
+
+.Comment-date {
+	color: #666; /* hell*/
+}
+
+.Comment-text {
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+
+.Comment-button {
+	padding: 0;
+  border: none;
+  font-size: 12px;
+  color: #0087E9;
+  background-color: transparent;
+  cursor: pointer;
+}
