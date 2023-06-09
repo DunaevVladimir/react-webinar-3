@@ -2,12 +2,6 @@
 	padding: 30px 0 0 0;
 }
 
-.CommentReply a {
-	color: #0087E9;
-	font-size: 16px;
-	line-height: 18px;
-}
-
 .CommentReply-form {
 	display: flex;
 	flex-direction: column;
@@ -39,4 +33,17 @@
 .CommentReply-buttons {
 	display: flex;
 	column-gap: 10px;
+}
+
+.CommentReply-button-login {
+	padding: 0;
+  border: none;
+  font-size: 16px;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+	color: #0087E9;
+	font-size: 16px;
+	line-height: 18px;
+	text-decoration: underline;
 }

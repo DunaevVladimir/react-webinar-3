@@ -33,7 +33,7 @@ function CommentReply({ exist, focusId, parent, articleId, addNewComment, setFoc
 						{articleId !== focusId && <button className={cn('button')} onClick={() => setFocus(articleId)}>Отмена</button>}
 					</div>
 				</form>
-				: <><button onClick={redirect}>Войдите</button><span>, чтобы иметь возможность комментировать</span></>
+				: <><button className={cn('button-login')} onClick={redirect}>Войдите</button><span>, чтобы иметь возможность комментировать</span></>
 			}
 		</div>
 	)
