@@ -1,10 +1,11 @@
-import { memo, useState } from "react";
+import { memo, useState, forwardRef, useRef } from "react";
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { Link } from "react-router-dom";
 import './style.css';
 
-function CommentReply({ isFirst, exist, focusId, parent, articleId, addNewComment, setFocus, redirect }) {
+function CommentReply({ isFirst, exist, focusId, parent, articleId, addNewComment, setFocus, redirect, forwardRef }) {
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		//@ Отправляем только если не пустое поле, заодно убираем лишние пробелы по краям
@@ -25,7 +26,7 @@ function CommentReply({ isFirst, exist, focusId, parent, articleId, addNewCommen
 
 	const cn = bem('CommentReply');
 	return (
-		<div className={cn(`${isFirst ? 'first' : ''}`)}>
+		<div ref={forwardRef} className={cn(`${isFirst ? 'first' : ''}`)}>
 			{exist
 				? <form onSubmit={(e) => handleSubmit(e)} className={cn('form')}>
 					<div className={cn('description')}>Новый комментарий</div>

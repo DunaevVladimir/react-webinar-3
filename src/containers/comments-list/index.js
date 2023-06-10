@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState, useRef } from "react";
+import { memo, useCallback, useMemo, useState, useRef, createRef, useEffect } from "react";
 import useTranslate from "../../hooks/use-translate";
 import Spinner from "../../components/spinner";
 import Comment from "../../components/comment";
@@ -10,6 +10,7 @@ import useSelector from "../../hooks/use-selector";
 import CommentsLayout from "../../components/comments-layout";
 import commentsActions from '../../store-redux/comments/actions';
 import { useDispatch, useSelector as useSelectorRedux } from 'react-redux';
+import ReplyRef from "../reply-ref";
 import CommentReply from "../../components/comment-reply";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -18,6 +19,7 @@ function CommentsList() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
+	const refToReply = useRef(null);
 
 	const select = useSelectorRedux(state => ({
 		comments: state.comments.data,
@@ -65,16 +67,21 @@ function CommentsList() {
 		changeFocus: useCallback((_id) => { setFocus(_id) }, []),
 		//@ Редирект на страницу логина и запоминаем обратный путь
 		redirect: useCallback(() => { navigate(`/login`, { state: { back: location.pathname } }) }, []),
+		//@ Скролл до формы ответа
+		toReply: useCallback(() => {
+			refToReply.current?.scrollIntoView({ behavior: 'smooth', block: "end" });
+		}, []),
 	}
-
+	console.log('e', refToReply)
 	const renders = {
 		item: useCallback(item => (
 			<>
-				<Comment item={item} onChangeFocus={callbacks.changeFocus} userId={exist.userId}>
+				<Comment item={item} onChangeFocus={callbacks.changeFocus} userId={exist.userId} onReply={callbacks.toReply}>
 
 				</Comment>
 				{focus._id === item._id &&
-					<CommentReply
+					<ReplyRef
+						ref={refToReply}
 						isFirst={focus.isFirst}
 						exist={exist.exists}
 						focusId={focus._id}
@@ -83,7 +90,7 @@ function CommentsList() {
 						addNewComment={callbacks.addNewComment}
 						setFocus={setFocus}
 						redirect={callbacks.redirect}>
-					</CommentReply>
+					</ReplyRef>
 				}
 			</>
 		), [options.comments, t, exist.exists, focus]),

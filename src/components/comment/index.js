@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
-function Comment({ item, onChangeFocus, userId }) {
+function Comment({ item, onChangeFocus, userId, onReply }) {
 
 	const lastChildId = item.children.length ? item.children[item.children.length - 1]._id : item._id;
 
@@ -25,7 +25,11 @@ function Comment({ item, onChangeFocus, userId }) {
 				<div className={cn('date')}>{new Date(item.dateCreate).toLocaleString("ru", options).replace('г.', '')}</div>
 			</div>
 			<div className={cn('text')}>{item.text}</div>
-			<button onClick={() => onChangeFocus({ _id: lastChildId, isFirst: item.children.length === 0, parentId: item._id })} className={cn('button')}>Ответить</button>
+			<button onClick={() => {
+				onChangeFocus({ _id: lastChildId, isFirst: item.children.length === 0, parentId: item._id });
+				setTimeout(onReply, 100);
+			}
+			} className={cn('button')}>Ответить</button>
 		</div>
 	);
 }
