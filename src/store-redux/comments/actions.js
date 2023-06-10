@@ -25,19 +25,17 @@ export default {
 	addNewComment: (data) => {
 		return async (dispatch, getState, services) => {
 			dispatch({ type: 'comment/load-start' });
-			console.log(services.api)
+
 			try {
 				const res = await services.api.request({
-					url: `api/v1/comments`,
+					url: `api/v1/comments?fields=_id,text,dateCreate,author(profile(name)),parent(_id,_type)`,
 					method: 'POST',
 					body: JSON.stringify(data),
 				});
 				//@ Комментарий успешно отправлен
-				console.log('RES', res.data.result);
 				dispatch({ type: 'comments/add-new-comment-success', payload: { data: res.data.result } });
 
 			} catch (e) {
-				console.log('RES', e);
 				//Ошибка загрузки
 				dispatch({ type: 'comments/load-error' });
 			}

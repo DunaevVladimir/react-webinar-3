@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState, useRef } from "react";
 import useTranslate from "../../hooks/use-translate";
 import Spinner from "../../components/spinner";
 import Comment from "../../components/comment";
@@ -25,10 +25,15 @@ function CommentsList() {
 		articleId: state.article.data._id,
 	}), shallowequal);
 
-	const [focus, setFocus] = useState(select.articleId);
+	const [focus, setFocus] = useState({
+		_id: select.articleId,
+		parentId: select.articleId,
+		isFirst: true,
+	});
 
 	const exist = useSelector(state => ({
 		exists: state.session.exists,
+		userId: state.session.user._id,
 	}));
 
 	//@ Составляем лист также с теми , у кого родитель - _id карточки товара
@@ -39,10 +44,12 @@ function CommentsList() {
 				{
 					_id: item._id,
 					userName: item.author.profile.name,
+					userId: item.author._id,
 					dateCreate: item.dateCreate,
 					text: item.text,
 					parent: item.parent,
-					level: level
+					level: level,
+					children: item.children,
 				}
 			))
 		]), [select.comments]),
@@ -52,8 +59,7 @@ function CommentsList() {
 		//@ Добавление комментария, обновление комментариев и сброс фокуса на стандартный
 		addNewComment: useCallback((data) => {
 			dispatch(commentsActions.addNewComment(data));
-			dispatch(commentsActions.load(select.articleId));
-			setFocus(select.articleId)
+			setFocus({ _id: select.articleId, isFirst: true, })
 		}, []),
 		//@ Смена фокуса комментария
 		changeFocus: useCallback((_id) => { setFocus(_id) }, []),
@@ -64,17 +70,21 @@ function CommentsList() {
 	const renders = {
 		item: useCallback(item => (
 			<>
-				<Comment item={item} onChangeFocus={callbacks.changeFocus} />
-				{focus === item._id &&
+				<Comment item={item} onChangeFocus={callbacks.changeFocus} userId={exist.userId}>
+
+				</Comment>
+				{focus._id === item._id &&
 					<CommentReply
+						isFirst={focus.isFirst}
 						exist={exist.exists}
-						focusId={focus}
-						parent={{ _id: item._id, _type: "comment" }}
+						focusId={focus._id}
+						parent={{ _id: focus.parentId, _type: "comment" }}
 						articleId={select.articleId}
 						addNewComment={callbacks.addNewComment}
 						setFocus={setFocus}
 						redirect={callbacks.redirect}>
-					</CommentReply>}
+					</CommentReply>
+				}
 			</>
 		), [options.comments, t, exist.exists, focus]),
 	};
@@ -88,10 +98,10 @@ function CommentsList() {
 					renderItem={renders.item}
 					count={select.comments.count}
 					exist={exist.exists} />
-				{focus === select.articleId &&
+				{focus._id === select.articleId &&
 					<CommentReply
 						exist={exist.exists}
-						focusId={focus}
+						focusId={focus._id}
 						parent={{ _id: select.articleId, _type: "article" }}
 						articleId={select.articleId}
 						addNewComment={callbacks.addNewComment}

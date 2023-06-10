@@ -4,23 +4,7 @@ import { cn as bem } from '@bem-react/classname';
 import { Link } from "react-router-dom";
 import './style.css';
 
-function Comments({ list, parent, renderItem, count, exist, addNewComment }) {
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		addNewComment({
-			_id: "648047135240ea36e3698441",
-			text: data,
-			parent: parent
-		});
-	}
-
-	const onChange = (data) => {
-		setData(data);
-	}
-
-	const [data, setData] = useState('');
-	const [currentComment, setCurrentComment] = useState('');
+function Comments({ list, renderItem, count }) {
 
 	const cn = bem('Comments');
 	return (

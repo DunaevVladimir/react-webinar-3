@@ -2,6 +2,10 @@
 	padding: 30px 0 0 0;
 }
 
+.CommentReply-first {
+	padding: 30px 0 0 30px;
+}
+
 .CommentReply-form {
 	display: flex;
 	flex-direction: column;
@@ -35,7 +39,7 @@
 	column-gap: 10px;
 }
 
-.CommentReply-button-login {
+.CommentReply-button-login, .CommentReply-button-cancel {
 	padding: 0;
   border: none;
   font-size: 16px;
@@ -46,4 +50,12 @@
 	font-size: 16px;
 	line-height: 18px;
 	text-decoration: underline;
+}
+
+.CommentReply-button-login {
+	color: #0087E9;
+}
+
+.CommentReply-button-cancel {
+	color: #666;
 }

@@ -1,11 +1,10 @@
 .Comment {
-
+	box-sizing: border-box;
 }
 
 .Comment-info {
 	display: flex;
 	column-gap: 10px;
-	box-sizing: border-box;
 	font-size: 12px;
 	margin-bottom: 10px;
 }
@@ -21,6 +20,7 @@
 .Comment-text {
 	margin-bottom: 10px;
 	font-size: 14px;
+	word-break: break-all; /* Для исправления большого текста*/
 }
 
 .Comment-button {
@@ -31,3 +31,8 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.user {
+	color: #666; 
+}
+

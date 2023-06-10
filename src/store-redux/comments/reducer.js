@@ -33,8 +33,19 @@ function reducer(state = initialState, action) {
 				waiting: true
 			}; //@todo текст ошибки сохранить?
 
-		// case "comments/add-new-comment-success":
-		// 	return { ...state, data: action.payload.data, waiting: false };
+		// Ответ записываем в стейт
+		case "comments/add-new-comment-success":
+			return {
+				data: {
+					...state.data,
+					items: [
+						...state.data.items,
+						action.payload.data
+					],
+					count: state.data.count + 1,
+				}
+				, waiting: false
+			};
 
 		default:
 			// Нет изменений
