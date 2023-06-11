@@ -69,10 +69,10 @@ function CommentsList() {
 		redirect: useCallback(() => { navigate(`/login`, { state: { back: location.pathname } }) }, []),
 		//@ Скролл до формы ответа
 		toReply: useCallback(() => {
-			refToReply.current?.scrollIntoView({ behavior: 'smooth', block: "end" });
+			refToReply.current?.scrollIntoView({ behavior: 'smooth', block: "center" });
 		}, []),
 	}
-	console.log('e', refToReply)
+
 	const renders = {
 		item: useCallback(item => (
 			<>

@@ -17,6 +17,9 @@ const config = {
 	},
 	api: {
 		baseUrl: ''
+	},
+	i18n: {
+		language: window.localStorage.getItem('language'),
 	}
 }
 

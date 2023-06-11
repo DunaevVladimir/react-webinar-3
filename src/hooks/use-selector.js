@@ -1,4 +1,4 @@
-import {useEffect, useLayoutEffect, useMemo, useState} from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import shallowequal from 'shallowequal';
 import useStore from "./use-store";
 
@@ -8,20 +8,20 @@ import useStore from "./use-store";
  * @return {*}
  */
 export default function useSelector(selectorFunc) {
-  const store = useStore();
+	const store = useStore();
 
-  const [state, setState] = useState(() => selectorFunc(store.getState()));
+	const [state, setState] = useState(() => selectorFunc(store.getState()));
 
-  const unsubscribe = useMemo(() => {
-    // Подписка. Возврат функции для отписки
-    return store.subscribe(() => {
-      const newState = selectorFunc(store.getState());
-      setState(prevState => shallowequal(prevState, newState) ? prevState : newState);
-    });
-  }, []); // Нет зависимостей - исполнится один раз
+	const unsubscribe = useMemo(() => {
+		// Подписка. Возврат функции для отписки
+		return store.subscribe(() => {
+			const newState = selectorFunc(store.getState());
+			setState(prevState => shallowequal(prevState, newState) ? prevState : newState);
+		});
+	}, []); // Нет зависимостей - исполнится один раз
 
-  // Отписка от store при демонтировании компонента
-  useLayoutEffect(() => unsubscribe, [unsubscribe]);
+	// Отписка от store при демонтировании компонента
+	useLayoutEffect(() => unsubscribe, [unsubscribe]);
 
-  return state;
+	return state;
 }

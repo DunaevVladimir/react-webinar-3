@@ -1,5 +1,5 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
-import {Routes, Route} from 'react-router-dom';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import useSelector from "../hooks/use-selector";
 import useStore from "../hooks/use-store";
 import useInit from "../hooks/use-init";
@@ -9,7 +9,8 @@ import Article from "./article";
 import Login from "./login";
 import Profile from "./profile";
 import Protected from "../containers/protected";
-import {useSelector as useSelectorRedux} from 'react-redux';
+import { useSelector as useSelectorRedux } from 'react-redux';
+import useServices from '../hooks/use-services';
 
 /**
  * Приложение
@@ -17,25 +18,25 @@ import {useSelector as useSelectorRedux} from 'react-redux';
  */
 function App() {
 
-  const store = useStore();
-  useInit(async () => {
-    await store.actions.session.remind();
-  })
+	const store = useStore();
+	useInit(async () => {
+		await store.actions.session.remind();
+	})
 
-  const activeModal = useSelectorRedux(state => state.modals.name);
+	const activeModal = useSelectorRedux(state => state.modals.name);
 
-  return (
-    <>
-      <Routes>
-        <Route path={''} element={<Main/>}/>
-        <Route path={'/articles/:id'} element={<Article/>}/>
-        <Route path={"/login"} element={<Login/>}/>
-        <Route path={"/profile"} element={<Protected redirect='/login'><Profile/></Protected>}/>
-      </Routes>
+	return (
+		<>
+			<Routes>
+				<Route path={''} element={<Main />} />
+				<Route path={'/articles/:id'} element={<Article />} />
+				<Route path={"/login"} element={<Login />} />
+				<Route path={"/profile"} element={<Protected redirect='/login'><Profile /></Protected>} />
+			</Routes>
 
-      {activeModal === 'basket' && <Basket/>}
-    </>
-  );
+			{activeModal === 'basket' && <Basket />}
+		</>
+	);
 }
 
 export default App;
