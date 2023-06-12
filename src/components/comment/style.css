@@ -20,7 +20,7 @@
 .Comment-text {
 	margin-bottom: 10px;
 	font-size: 14px;
-	word-break: break-all; /* Для исправления большого текста*/
+	word-break: break-word; /* Для исправления большого текста*/
 }
 
 .Comment-button {

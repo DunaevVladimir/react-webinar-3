@@ -27,7 +27,6 @@ class I18n {
 		this.currentLanguage = language;
 		this.setApiLanguage();
 		for (const listener of this.listeners) listener(this.currentLanguage);
-		location.reload()
 	}
 
 	//@ Меняем заголовок у api
