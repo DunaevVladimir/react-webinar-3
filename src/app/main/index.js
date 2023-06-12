@@ -12,27 +12,27 @@ import TopHead from "../../containers/top-head";
 
 function Main() {
 
-	const store = useStore();
-	const { t, setLanguage, lang } = useTranslate();
+  const store = useStore();
+  const { t, setLanguage, lang } = useTranslate();
 
-	useInit(async () => {
-		await Promise.all([
-			store.actions.catalog.initParams(),
-			store.actions.categories.load()
-		]);
-	}, [lang], true); //@ добавляем в зависимость lang
+  useInit(async () => {
+    await Promise.all([
+      store.actions.catalog.initParams(),
+      store.actions.categories.load()
+    ]);
+  }, [lang], true); //@ добавляем в зависимость lang
 
-	return (
-		<PageLayout>
-			<TopHead />
-			<Head title={t('title')}>
-				<LocaleSelect />
-			</Head>
-			<Navigation />
-			<CatalogFilter />
-			<CatalogList />
-		</PageLayout>
-	);
+  return (
+    <PageLayout>
+      <TopHead />
+      <Head title={t('title')}>
+        <LocaleSelect />
+      </Head>
+      <Navigation />
+      <CatalogFilter />
+      <CatalogList />
+    </PageLayout>
+  );
 }
 
 export default memo(Main);
